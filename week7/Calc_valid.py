@@ -7,9 +7,11 @@ class Calc_valid:
 
     def is_valid_clac(self, ):
 
+        self.flag = False
         try:
             self.num1/self.num2
         except:
             print("계산 불가능한 값입니다.")
         else:
+            self.flag = True
             print("계산 가능한 값입니다.")
