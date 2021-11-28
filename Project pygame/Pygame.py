@@ -10,7 +10,7 @@ surface = pygame.display.set_mode((WINDOW_WIDTH,WINDOW_HIGHT)) # 화면 설정
 
 pygame.display.set_caption("지렁이 게임") # 게임 이름
 background = pygame.image.load("C:/Users/User/PycharmProjects/study/project pygame/image/image1.png.jpg")
-surface.blit(background, (0,0)) # 배경 그리기 (0,0)은 background가 표시되는 위치
+surface.blit(background, (0,0)) # 배경 씌우기 (0,0)은 background가 표시되는 위치
 done = False
 
 def run():
