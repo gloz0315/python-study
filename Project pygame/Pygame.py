@@ -1,5 +1,6 @@
 import pygame
 
+
 pygame.init() # 파이게임 초기화
 
 # 윈도우 창 설정하기
@@ -21,9 +22,10 @@ def run():
                 done = True
                 break
 
-        surface.blit(background, (0, 0))  # 배경 그리기 (0,0)은 background가 표시되는 위치
         pygame.display.update() #화면 그리기 업데이트
 
 run() # 게임 실행
 pygame.quit() # 나가기
+
+
 
