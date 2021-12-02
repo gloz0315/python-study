@@ -89,7 +89,6 @@ if __name__ == "__main__":
     window = pygame.display.set_mode((WINDOW_WIDTH,WINDOW_HEIGHT)) #화면 창 설정
     pygame.display.set_caption("지렁이 게임") # 게임 이름 설정
     surface = pygame.Surface(window.get_size()) # 윈도우의 실제 크기를 넣어줌
-    surface = surface.convert()
     surface.fill(WHITE) # 하얀색으로 칠하기
     clock = pygame.time.Clock() # 게임에 시간을 넣어서 할 것
     window.blit(surface, (0, 0)) # 배경 씌우기 (0,0)은 surface가 표시되는 위치
