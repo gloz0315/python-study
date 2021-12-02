@@ -48,11 +48,10 @@ class Snake(object):
     def move(self):
         current = self.positions[0]
         x, y = self.direction
-        # 창을 넘어가도 잘 나오게끔 만듬
+        # 뱀의 뒷부분을 이어주게끔 만들기 위해서 그려주기 위한 new
         new = (((current[0] + (x * GRID_SIZE)) % WINDOW_WIDTH , (current[1] + (y * GRID_SIZE)) % WINDOW_HEIGHT))
 
-
-        if new in self.positions[1:]:
+        if new in self.positions[2:]:
             #머리가 몸통에 부딪히면 다시 시작
             self.create()
         else:
