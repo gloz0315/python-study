@@ -14,12 +14,15 @@ GRID_HEIGHT = WINDOW_HEIGHT/GRID_SIZE
 WHITE = (255,255,255)
 GREEN = (0, 255, 0)
 RED = (255,0,0)
+BLUE = (0, 0, 255)
 
 # 파이게임에서의 좌표는 위쪽이 -1, 아래쪽이 +1
-UP = (0,-1)
+UP = (0, -1)
 DOWN = (0, 1)
 LEFT = (-1, 0)
 RIGHT = (1, 0)
+
+velocity = 10
 
 #하나의 사각형을 만들기
 def draw_object(surface, color, position):
@@ -65,6 +68,9 @@ class Snake(object):
         for i in self.positions:
             draw_object(surface, self.color, i)
 
+    def eat(self):
+        self.length += 1
+
 class Feed(object):
     def __init__(self):
         self.position = (0,0)
@@ -79,7 +85,18 @@ class Feed(object):
     def draw(self,surface):
         draw_object(surface, self.color, self.position)
 
+def check_eat(snake, feed):
+    if snake.positions[0] == feed.position:
+        snake.eat()
+        feed.create()
 
+# 점수와 길이가 나오는 출력함수
+def show_info(length, speed, surface):
+    font = pygame.font.Font(None, 34)
+    text = font.render("length: " +  str(length) + " speed: " + str(round(speed,2)), 1, BLUE)
+    pos = text.get_rect() # 실제 텍스트의 사이즈
+    pos.topleft
+    surface.blit(text,pos) # text와 pos가 나타나게 만듬
 
 if __name__ == "__main__":
     snake = Snake()
@@ -90,7 +107,7 @@ if __name__ == "__main__":
     pygame.display.set_caption("지렁이 게임") # 게임 이름 설정
     surface = pygame.Surface(window.get_size()) # 윈도우의 실제 크기를 넣어줌
     surface.fill(WHITE) # 하얀색으로 칠하기
-    clock = pygame.time.Clock() # 게임에 시간을 넣어서 할 것
+    clock = pygame.time.Clock() # 게임에 시간을 넣어서 할 것 (프레임을 맞추기 위해서)
     window.blit(surface, (0, 0)) # 배경 씌우기 (0,0)은 surface가 표시되는 위치
 
 
@@ -112,12 +129,14 @@ if __name__ == "__main__":
 
         surface.fill(WHITE)
         snake.move()
-        speed = 20
+        check_eat(snake, feed)
+        speed = (velocity + snake.length)/2
+        show_info(snake.length, speed, surface)
         snake.draw(surface)
         feed.draw(surface)
         window.blit(surface,(0,0)) # 화면에 덮어씌움
         pygame.display.update() # 화면 업데이트
-        clock.tick(speed) # -> 이걸 하지 않으면 지렁이가 미친듯이 움직임
+        clock.tick(speed) # -> 이걸 하지 않으면 지렁이가 미친듯이 움직임 (프레임 수 맞추기)
 
 
 
